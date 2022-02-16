@@ -1,0 +1,35 @@
+{
+  "name": "ts-docker-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate code for node, express, ts and docker",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/tsc --project ./tsconfig.json --watch & NODE_ENV=development nodemon src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishalsh2299/node-ts-docker-boilerplate.git"
+  },
+  "author": "Vishal Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishalsh2299/node-ts-docker-boilerplate/issues"
+  },
+  "homepage": "https://github.com/vishalsh2299/node-ts-docker-boilerplate#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/morgan": "^1.9.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.6.0"
+  }
+}
