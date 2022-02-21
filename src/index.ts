@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import { logger } from "./config/logger";
 import morganLogger from "./config/morgan";
+import routes from "./routes";
+import { notFoundHandler } from "./helpers/notfound_handler";
 
 const app = express();
 
@@ -19,10 +21,8 @@ app.use(
 
 app.use(morganLogger);
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-  res.status(200);
-});
+app.use("/", routes);
+app.use("*", notFoundHandler);
 
 const port = process.env.PORT || 9000;
 
