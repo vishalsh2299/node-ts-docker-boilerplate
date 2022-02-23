@@ -1,9 +1,10 @@
+import db from "../../db";
 import { Router } from "express";
+import { wrapper } from "../../helpers/exception_wrapper";
+import { ProductController } from "../../controllers/product";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("WOOOR");
-});
+router.get("/", wrapper(ProductController.getAll));
 
 export default router;
