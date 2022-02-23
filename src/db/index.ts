@@ -2,7 +2,7 @@ import { logger } from "../config/logger";
 
 import path from "path";
 import { Pool, QueryResult } from "pg";
-import { loadMigrationFiles, migrate } from "postgres-migrations";
+import { migrate } from "postgres-migrations";
 import User from "../models/user";
 
 const poolConfig = {

@@ -1,4 +1,3 @@
-import db from "../../db";
 import { Router } from "express";
 import { wrapper } from "../../helpers/exception_wrapper";
 import { ProductController } from "../../controllers/product";
