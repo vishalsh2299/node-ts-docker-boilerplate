@@ -12,6 +12,9 @@ import morganLogger from "./config/morgan";
 import routes from "./routes";
 import { notFoundHandler } from "./helpers/notfound_handler";
 import db from "./db";
+import swaggerJsdoc from "swagger-jsdoc";
+import options from "./swagger/swagger";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 
@@ -32,6 +35,14 @@ async function main() {
 
   await db.runMigrations();
 
+  /// Swagger setup
+  try {
+    const openapiSpecification = swaggerJsdoc(options);
+    app.use("/swagger", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+  } catch (e) {
+    logger.error(`main(): Swagger error: ${e}`);
+  }
+
   app.use("/", routes);
   app.use("*", notFoundHandler);
 
@@ -39,7 +50,11 @@ async function main() {
 
   app.listen(port, () => {
     logger.info(`Website API Server is running`, ["Server"]);
-    console.log(`Listening to port ${port}`);
+
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      `Server :: Running @ 'http://localhost:${port}'`
+    );
   });
 }
 

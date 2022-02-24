@@ -1,9 +1,4 @@
-import {
-  NullableNumber,
-  NullableDate,
-  NullableBoolean,
-  NullableString,
-} from "../typings/types";
+import { NullableNumber, NullableDate } from "../typings/types";
 
 export class Common {
   public id: NullableNumber = undefined;

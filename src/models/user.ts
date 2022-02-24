@@ -1,26 +1,10 @@
-/**
- *        @file user.ts
- *  @repository 000-a-3100_api_boilerplate
- * @application 000-a-3100_api_boilerplate
- *     @summary User Class
- * @description Defines the structure for user model
- */
-
+import { Helper } from "../helpers/helper";
 import {
   NullableBoolean,
   NullableNumber,
   NullableString,
 } from "../typings/types";
 import Common from "./common";
-
-/**
- * User class (instances throughout code as cUser)
- *
- * This class is instantiated for each endpoint call and contains information about the user and
- * session associated with the endpoint call.
- *
- * @class User
- */
 
 export class User extends Common {
   public username: NullableString = undefined;
@@ -33,8 +17,11 @@ export class User extends Common {
 
   public is_admin: NullableBoolean = undefined;
 
-  constructor() {
+  constructor(model?: any) {
     super();
+    if (model) {
+      Helper.shallowCopy(model, this);
+    }
   }
 }
 

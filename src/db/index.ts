@@ -1,7 +1,7 @@
 import { logger } from "../config/logger";
 
 import path from "path";
-import { Pool, QueryResult } from "pg";
+import { Pool, PoolClient, QueryResult } from "pg";
 import { migrate } from "postgres-migrations";
 import User from "../models/user";
 
@@ -63,6 +63,60 @@ class PgPool {
       return res;
     } catch (error) {
       logger.error({ error, query });
+      throw error;
+    }
+  }
+
+  async tquery(
+    client: PoolClient,
+    query: any,
+    params: any[] = []
+  ): Promise<QueryResult<any>> {
+    const start = Date.now();
+    try {
+      const res = await client.query(query, params);
+
+      // time elapsed since invocation to execution
+      const duration = Date.now() - start;
+      console.log({ query, duration, rows: res.rowCount });
+
+      logger.info({ query, duration, rows: res.rowCount });
+      return res;
+    } catch (error) {
+      logger.error({ error, query });
+      throw error;
+    }
+  }
+
+  async beginTransaction(cUser: User): Promise<PoolClient> {
+    try {
+      const client = await this.pool.connect();
+      await client.query(
+        `SET SESSION postgres.username = '${cUser.username}'`,
+        []
+      );
+      await client.query("BEGIN");
+
+      return client;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async commitTransaction(client: PoolClient) {
+    try {
+      await client.query("COMMIT");
+      client.release();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async rollbackTransaction(client: PoolClient) {
+    try {
+      await client.query("ROLLBACK");
+      client.release();
+    } catch (error) {
       throw error;
     }
   }
