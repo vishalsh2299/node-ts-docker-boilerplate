@@ -53,6 +53,9 @@ async function main() {
   app.listen(port, () => {
     logger.info(`Website API Server is running`, ["Server"]);
 
+    /// Event to emit when server starts running
+    app.emit("CheckConnection");
+
     console.log(
       "\x1b[33m%s\x1b[0m",
       `Server :: Running @ 'http://localhost:${port}'`
