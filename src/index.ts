@@ -5,7 +5,7 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env" + `.${process.env.NODE_ENV}`),
 });
 
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { logger } from "./config/logger";
 import morganLogger from "./config/morgan";
@@ -15,6 +15,7 @@ import db from "./db";
 import swaggerJsdoc from "swagger-jsdoc";
 import options from "./swagger/swagger";
 import swaggerUi from "swagger-ui-express";
+import { errorHandler } from "./helpers/error_handler";
 
 const app = express();
 
@@ -45,6 +46,7 @@ async function main() {
 
   app.use("/", routes);
   app.use("*", notFoundHandler);
+  app.use(errorHandler);
 
   const port = process.env.PORT || 9000;
 
