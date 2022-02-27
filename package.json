@@ -4,10 +4,16 @@
   "description": "Boilerplate code for node, express, ts and docker",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/tsc --project ./tsconfig.json",
     "dev": "./node_modules/.bin/tsc --project ./tsconfig.json --watch & NODE_ENV=development nodemon src/index.ts",
     "predev": "npm test",
-    "start": "node dist/index.js",
-    "test": "NODE_ENV=development nyc --reporter=html --reporter=text mocha --exit --check-leaks -r tsconfig-paths/register -r ts-node/register \"src/test/index.ts\""
+    "test": "NODE_ENV=development nyc --reporter=html --reporter=text mocha --exit --check-leaks -r tsconfig-paths/register -r ts-node/register \"src/test/index.ts\"",
+    "start": "NODE_ENV=production node dist/index.js",
+    "build:docker": "docker-compose up --build",
+    "dev:docker": "./node_modules/.bin/tsc --project ./tsconfig.json --watch & NODE_ENV=docker nodemon --legacy-watch src/index.ts",
+    "predev:docker": "npm run test:docker",
+    "test:docker": "NODE_ENV=docker nyc --reporter=html --reporter=text mocha --exit --check-leaks -r tsconfig-paths/register -r ts-node/register \"src/test/index.ts\"",
+    "compose": "docker compose up"
   },
   "repository": {
     "type": "git",
@@ -39,11 +45,13 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/cors": "^2.8.12",
     "@types/morgan": "^1.9.3",
+    "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "joi": "^17.6.0",
     "morgan": "^1.10.0",
+    "nyc": "^15.1.0",
     "pg": "^8.7.3",
     "postgres-migrations": "^5.3.0",
     "swagger-jsdoc": "^6.1.0",

@@ -33,6 +33,10 @@ const format = winston.format.combine(
 );
 
 const transports = [
+  new winston.transports.Console({
+    level: process.env.LOG_LEVEL || "debug",
+    format: format,
+  }),
   new winston.transports.File({
     dirname: "logs",
     filename: "project_log.log",
@@ -40,7 +44,6 @@ const transports = [
     maxsize: 20971520, // 20 MB
     zippedArchive: true,
   }),
-  new winston.transports.Console(),
 ];
 
 winston.addColors(colors);
