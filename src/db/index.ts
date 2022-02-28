@@ -8,13 +8,11 @@ import chalk from "chalk";
 
 const poolConfig = {
   port: parseInt(process.env.PORT as string),
-  ssl:
-    process.env.NODE_ENV !== "production"
-      ? false
-      : {
-          require: true,
-          rejectUnauthorized: false,
-        },
+  ssl: true,
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: { require: true },
+  },
   max: 20,
   connectionString: process.env.DATABASE_URL as string,
   ensureDatabaseExists: true,
