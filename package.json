@@ -9,7 +9,7 @@
     "predev": "npm test",
     "test": "NODE_ENV=development nyc --reporter=html --reporter=text mocha --exit --check-leaks -r tsconfig-paths/register -r ts-node/register \"src/test/index.ts\"",
     "start": "NODE_ENV=production node dist/index.js",
-    "deploy:heroku": "npm run build && mkdir -p dist/migrations && cp -R ./src/migrations/ dist/migrations/ && git add . && git commit -m 'Ready to deploy' && heroku stack:set container && git push heroku master",
+    "deploy:heroku": "npm run build && mkdir -p dist/migrations && cp -R ./src/migrations/ dist/migrations/ && git add . && git commit -m 'Ready to deploy' && heroku stack:set container && git push heroku HEAD:master",
     "build:docker": "docker-compose up --build",
     "dev:docker": "./node_modules/.bin/tsc --project ./tsconfig.json --watch & NODE_ENV=docker nodemon --legacy-watch src/index.ts",
     "predev:docker": "npm run test:docker",
