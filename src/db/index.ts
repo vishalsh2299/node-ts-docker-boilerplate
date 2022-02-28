@@ -12,7 +12,6 @@ const poolConfig = {
     process.env.NODE_ENV !== "production"
       ? false
       : {
-          require: true,
           rejectUnauthorized: false,
         },
   max: 20,
