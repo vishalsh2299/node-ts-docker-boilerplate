@@ -12,6 +12,10 @@ ENV NODE_PATH=./build
 
 RUN npm run build
 
+RUN mkdir -p /usr/app/dist/migrations
+
+COPY ./src/migrations/ /usr/app/dist/migrations/
+
 CMD ["npm", "start"]
 
 
