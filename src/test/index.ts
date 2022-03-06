@@ -1,6 +1,6 @@
 import app from "../index";
 
-function importTest(name: string, path: string) {
+function importTestFiles(name: string, path: string) {
   describe(name, function () {
     require(path);
   });
@@ -15,8 +15,8 @@ describe("Test Files", function () {
   });
 
   /// Import test files to run
-  importTest("Product API test files", "./routes/products/index.spec.ts");
-  importTest("Other API test files", "./routes/other/index.spec.ts");
+  importTestFiles("Product API test files", "./routes/products/index.spec.ts");
+  importTestFiles("Other API test files", "./routes/other/index.spec.ts");
 
   after(function () {
     console.log("All tests completed");

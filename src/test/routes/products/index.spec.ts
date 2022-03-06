@@ -3,9 +3,7 @@ import app from "../../../index";
 import { expect } from "chai";
 import { Product } from "../../../models/product";
 
-/// Test case to get all products
-/// Get product by id
-/// Update product
+/// Test case to for all product APIs
 describe("/GET /POST /PUT /DELETE PRODUCT", () => {
   let product: any;
 
@@ -111,6 +109,7 @@ describe("/GET /POST /PUT /DELETE PRODUCT", () => {
       });
   });
 
+  /// Testing delete product api
   it("DELETE PRODUCT", function (done) {
     request(app)
       .delete(`/v0/product/${product ? product.id : -1}`)

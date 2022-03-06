@@ -8,7 +8,7 @@ COPY . .
 
 RUN npm install
 
-ENV NODE_PATH=./build
+ENV NODE_PATH=/usr/app/node_modules
 
 RUN npm run build
 

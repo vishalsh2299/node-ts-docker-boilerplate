@@ -33,7 +33,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - ./pgadmin-data:/var/lib/pgadmin
     env_file:
       - .env.docker
     depends_on:
