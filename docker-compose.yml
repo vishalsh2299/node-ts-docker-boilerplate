@@ -1,0 +1,43 @@
+services:
+  node-docker-ts-app:
+    container_name: node-docker-ts-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    env_file:
+      - .env.docker
+    ports:
+      - "9000:9000"
+    command: npm run dev:docker
+    volumes:
+      - ./src:/usr/app/src
+      - ./nodemon.json:/usr/app/nodemon.json
+  postgres:
+    container_name: postgres
+    image: postgres:13.2
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env.docker
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    env_file:
+      - .env.docker
+    depends_on:
+      - postgres
+volumes:
+    postgres:
+    pgadmin-data:

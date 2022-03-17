@@ -1,0 +1,11 @@
+src/node_modules
+
+coverage
+.nyc_output
+logs
+
+Dockerfile
+.dockerignore
+
+Dockerfile-heroku
+*.env

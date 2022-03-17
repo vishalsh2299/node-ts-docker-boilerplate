@@ -105,3 +105,9 @@ dist
 logs
 
 package-lock.json
+
+postgresdata
+
+.env.production
+
+pgadmin-data

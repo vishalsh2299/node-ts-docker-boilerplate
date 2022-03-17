@@ -1,11 +1,3 @@
-/**
- *        @file types.ts
- *  @repository 000-a-3100_api_boilerplate
- * @application 000-a-3100_api_boilerplate
- *     @summary Types
- * @description Define types used accross Application
- */
-
 import { User } from "../models/user";
 
 export type NullableAny = any | null | undefined;
@@ -15,10 +7,8 @@ export type NullableNumber = number | null | undefined;
 export type NullableBoolean = boolean | null | undefined;
 export type NullableBuffer = Buffer | null | undefined;
 
-// Array
-
+/// Array
 export type NullableArrayString = Array<string> | null | undefined;
 
-// Custom
-
+/// Custom
 export type NullableUser = User | null | undefined;

@@ -4,6 +4,7 @@ import path from "path";
 import { Pool, PoolClient, QueryResult } from "pg";
 import { migrate } from "postgres-migrations";
 import User from "../models/user";
+import chalk from "chalk";
 
 const poolConfig = {
   port: parseInt(process.env.PORT as string),
@@ -57,9 +58,18 @@ class PgPool {
 
       // time elapsed since invocation to execution
       const duration = Date.now() - start;
-      console.log({ query, duration, rows: res.rowCount });
 
-      logger.info({ query, duration, rows: res.rowCount });
+      if (
+        process.env.NODE_ENV == "development" ||
+        process.env.NODE_ENV == "docker"
+      )
+        logger.info(
+          `{
+        \r query: ${chalk.yellow(query)}
+        \r duration: ${chalk.yellow(duration)},
+        \r rows: ${chalk.yellow(res.rowCount)}
+        \r}`
+        );
       return res;
     } catch (error) {
       logger.error({ error, query });
@@ -78,9 +88,18 @@ class PgPool {
 
       // time elapsed since invocation to execution
       const duration = Date.now() - start;
-      console.log({ query, duration, rows: res.rowCount });
 
-      logger.info({ query, duration, rows: res.rowCount });
+      if (
+        process.env.NODE_ENV == "development" ||
+        process.env.NODE_ENV == "docker"
+      )
+        logger.info(
+          `{
+        \r query: ${chalk.yellow(query)}
+        \r duration: ${chalk.yellow(duration)},
+        \r rows: ${chalk.yellow(res.rowCount)}
+        \r}`
+        );
       return res;
     } catch (error) {
       logger.error({ error, query });

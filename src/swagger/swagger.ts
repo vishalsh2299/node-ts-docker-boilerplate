@@ -12,6 +12,10 @@ export default {
         url: "http://localhost:9000",
         description: "LOCAL 9000",
       },
+      {
+        url: " https://node-docker-pg-ts.herokuapp.com",
+        description: "Heroku",
+      },
     ],
     components: {
       securitySchemes: {
