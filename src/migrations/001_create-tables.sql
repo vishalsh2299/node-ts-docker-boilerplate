@@ -12,7 +12,7 @@ BEGIN
 	SELECT id
 	INTO STRICT
 	UserID FROM public.users WHERE username = current_setting
-	('CURRENT_USER.username');
+	('testingdb.username');
 RETURN UserID;
 
 EXCEPTION

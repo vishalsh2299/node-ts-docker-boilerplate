@@ -50,7 +50,7 @@ class PgPool {
     try {
       /// Set the session so the current_user function will pick user from this
       await this.pool.query(
-        `SET SESSION postgres.username = '${cUser.username}'`,
+        `SET SESSION testingdb.username = '${cUser.username}'`,
         []
       );
 
@@ -111,7 +111,7 @@ class PgPool {
     try {
       const client = await this.pool.connect();
       await client.query(
-        `SET SESSION postgres.username = '${cUser.username}'`,
+        `SET SESSION testingdb.username = '${cUser.username}'`,
         []
       );
       await client.query("BEGIN");
