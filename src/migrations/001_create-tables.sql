@@ -113,6 +113,3 @@ WITH (
 
 INSERT INTO public.users (created_by, id, username, hashpass) 
   VALUES (1, 1, 'user_default', 'user_default');
-
-  INSERT INTO public.users (created_by, id, username, hashpass) 
-  VALUES (2, 2, 'second_user', 'second_user');
