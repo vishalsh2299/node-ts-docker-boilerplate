@@ -100,7 +100,7 @@ export class ProductService extends CommonService {
 
   public async addProduct(product: Product): Promise<any> {
     /// Begin Transaction
-    const client = await db.beginTransaction(this.user_current);
+    // const client = await db.beginTransaction(this.user_current);
 
     try {
       const insertSqlData = Helper.getSQLSatementInsert(product);
@@ -110,8 +110,14 @@ export class ProductService extends CommonService {
               RETURNING *
               `;
       // insert result
-      const result = await db.tquery(
-        client,
+      // const result = await db.tquery(
+      //   client,
+      //   insertSql,
+      //   insertSqlData.param_values
+      // );
+
+      const result = await db.query(
+        this.user_current,
         insertSql,
         insertSqlData.param_values
       );
@@ -120,10 +126,10 @@ export class ProductService extends CommonService {
       is_enabled, created_by, created_date, modified_by, modified_date FROM view_product_data WHERE id = $1`;
       const params = [result.rows[0].id];
 
-      const query_results = await db.tquery(client, sql, params);
+      const query_results = await db.query(this.user_current, sql, params); //await db.tquery(client, sql, params);
 
       /// Commit Transaction
-      await db.commitTransaction(client);
+      // await db.commitTransaction(client);
 
       return {
         success: true,
@@ -131,7 +137,7 @@ export class ProductService extends CommonService {
       };
     } catch (error: any) {
       /// Rollback Transaction
-      await db.rollbackTransaction(client);
+      // await db.rollbackTransaction(client);
 
       logger.error(`ProductService.addProduct() Error: ${error}`);
       return {
